@@ -1,0 +1,17 @@
+<h1>{{ product.pname }}</h1>
+{% if error_message %} <p><strong>{{ error_message }}</strong></p> {% endif %}
+
+<!-- <ul>
+{% for ingredient in product.ingredient_set.all %}
+    <li>{{ ingredient.iname }}</li>
+{% endfor %}
+</ul> -->
+
+<form action="{% url 'products:ingredient_pick' product.id %}" method="post">
+{% csrf_token %}
+{% for ingredient in product.ingredient_set.all %}
+    <input type="radio" name="ingredient" id="ingredient{{ forloop.counter }}" value="{{ ingredient.id }}" />
+    <label for="ingredient{{ forloop.counter }}">{{ ingredient.iname }}</label><br />
+{% endfor %}
+<input type="submit" value="Pick" />
+</form>

@@ -9,7 +9,8 @@ class Product(models.Model):
 	pdate = models.DateTimeField('add date',default=datetime.datetime.now)
 	
 	def was_published_recently(self):
-		return self.pdate >= timezone.now() - datetime.timedelta(days=1)
+		now = timezone.now();
+		return now >= self.pdate >= timezone.now() - datetime.timedelta(days=1)
 	was_published_recently.admin_order_field = 'pdate'
 	was_published_recently.boolean = True
 	was_published_recently.short_description = 'Published recently?'

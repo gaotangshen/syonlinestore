@@ -1,0 +1,9 @@
+<h1>{{ product.pname }}</h1>
+
+<ul>
+{% for ingredient in product.ingredient_set.all %}
+    <li>{{ ingredient.iname }} </li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'products:detail' product.id %}">Vote again?</a>

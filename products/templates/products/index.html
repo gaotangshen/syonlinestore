@@ -1,0 +1,12 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'products/style.css' %}" />
+{% if latest_product_list %}
+    <ul>
+    {% for product in latest_product_list %}
+        <li><a href="{% url 'products:detail' product.id %}">{{ product.pname }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No products are available.</p>
+{% endif %}
