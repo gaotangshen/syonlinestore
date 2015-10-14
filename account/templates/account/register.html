@@ -1,0 +1,14 @@
+{% extends "account/base.html" %}
+{% load bootstrap3 %}
+{% block title %}User Registration{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
+    <form method="post" action=".">
+    {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">Register
+        {% endbuttons %} 
+    </form>
+    <a href="/">Login</a>
+{% endblock %}

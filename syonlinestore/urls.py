@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+
 admin.site.site_header = 'SY Online Store Admin'
 admin.site.site_title = 'SY Online Store Admin'
 urlpatterns = [
 	url(r'^products/', include('products.urls', namespace="products")),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^account/',include('account.urls', namespace="account")),
 ]

@@ -64,3 +64,4 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Product
     template_name = 'products/results.html'
+
