@@ -3,9 +3,10 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-	url('^register/$', views.register, name="register"),
+	url(r'^$', views.home, name='home'),
+	url(r'^register/$', views.register, name="register"),
     # url('^register/success/$', views.register_success, name="register_success"),
-	url('^login/$', views.login, name='login'),
-	url('^$', views.home, name='home'),
-	url('^password_reset/$', views.password_reset,  name='password_reset'),
+	url(r'^login/$', views.login, name='login'),
+	url(r'^logout/$', views.logout, name='logout'),	
+	url(r'^password_reset/$', views.password_reset,  name='password_reset'),
 ] 

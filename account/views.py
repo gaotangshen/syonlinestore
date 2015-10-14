@@ -8,11 +8,19 @@ from django.template.context import RequestContext
 from django.forms.formsets import formset_factory
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.csrf import csrf_protect
+from pprint import pprint
 # from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegistrationForm
-
+def my_login_required(function):
+    def wrapper(request, *args, **kw):
+        user=request.user  
+        if not (user.is_authenticated()):
+            return HttpResponseRedirect('/account/login')
+        else:
+            return function(request, *args, **kw)
+    return wrapper
 @csrf_protect
 def register(request):
     if request.method == 'POST':
@@ -34,15 +42,16 @@ def register(request):
     'account/register.html',
     variables,
     )
- 
-def logout_page(request):
+@login_required
+def logout(request):
+
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('account/index.html')
  
 @login_required
 def home(request):
     return render_to_response(
-    'index.html',
+    'account/index.html',
     { 'user': request.user }
     )
 
@@ -58,17 +67,17 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                return redirect('login')
-                return render(request, 'account/index.html')
+                return redirect('http://127.0.0.1:8000/account/')
+                # return render(request, 'account/index.html')
                 # return render('account/index.html', RequestContext(request))
             else:
-                return render_to_response('account/login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
+                form.errors = "username password not match"
+                return render(request, 'account/login.html', {'form': form}) 
+                # render_to_response('account/login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
         else:
-            return render_to_response('account/login.html', RequestContext(request, {'form': form,}))
+            return render(request, 'account/login.html', {'form': form})
+            # render_to_response('account/login.html', RequestContext(request, {'form': form,}))
 
 def password_reset(request):
     response = "You're trying to reset your password"
     return HttpResponse(response)
-
-# def home():
-#     return render(request, 'account/index.html')

@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--     <link rel="icon" href="../../favicon.ico"> -->
+    <title>Signin Template for Bootstrap</title>
+    {# Load the tag library #}
+    {% load bootstrap3 %}
+    <script src="{% bootstrap_jquery_url %}"></script>
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+<!-- {% load staticfiles %} -->
 
-{# Load the tag library #}
-{% load bootstrap3 %}
-<script src="{% bootstrap_jquery_url %}"></script>
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-
-{% bootstrap_javascript %}
-    <title>{% block title %}My amazing site{% endblock %}</title>
-</head>
-
-<body>
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
-        </ul>
-        {% endblock %}
-    </div>
-
-    <div id="content">
+<link rel="stylesheet" type="text/css" href="{% static 'account/style.css' %}" />
+    {% bootstrap_javascript %}
+  </head>
+  <body>
+    <div class="container">
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
         {% block content %}{% endblock %}
-    </div>
-</body>
+    </div> <!-- /container -->
+  </body>
 </html>

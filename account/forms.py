@@ -5,27 +5,27 @@ from django.contrib.auth.models import User
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,
-        label=u"用户名",
-        error_messages={'required': '请输入用户名'},
+        label=u"Username",
+        error_messages={'required': 'Username'},
         widget=forms.TextInput(
             attrs={
-                'placeholder':u"用户名",
+                'placeholder':u"Username",
             }
         ),
     )    
     password = forms.CharField(
         required=True,
-        label=u"密码",
-        error_messages={'required': u'请输入密码'},
+        label=u"Password",
+        error_messages={'required': u'Password'},
         widget=forms.PasswordInput(
             attrs={
-                'placeholder':u"密码",
+                'placeholder':u"Password",
             }
         ),
     )   
     def clean(self):
         if not self.is_valid():
-            raise forms.ValidationError(u"用户名和密码为必填项")
+            raise forms.ValidationError(u"Username and Password are required")
         else:
             cleaned_data = super(LoginForm, self).clean() 
 
@@ -33,18 +33,20 @@ class RegistrationForm(forms.Form):
  
     username = forms.RegexField(
         regex=r'^\w+$', 
-        widget=forms.TextInput(attrs=dict(required=True, max_length=30)), 
-        label=u"Username", 
-        error_messages={ 'invalid': "This value must contain only letters, numbers and underscores." })
+        required=True,
+        widget=forms.TextInput(attrs=dict( max_length=30)), 
+        label="Username", 
+        error_messages={ 'invalid': "This value must contain only letters, numbers and underscores." }
+        )
     email = forms.EmailField(
         widget=forms.TextInput(attrs=dict(required=True, max_length=30)), 
-        label=u"Email address")
+        label="Email address")
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), 
-        label=u"Password",)
+        label="Password",)
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), 
-        label=u"Password (again)")
+        label="Password (again)")
  
     def clean_username(self):
         try:
