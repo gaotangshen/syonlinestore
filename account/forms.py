@@ -23,6 +23,7 @@ class LoginForm(forms.Form):
             }
         ),
     )   
+
     def clean(self):
         if not self.is_valid():
             raise forms.ValidationError(u"Username and Password are required")

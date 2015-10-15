@@ -62,8 +62,8 @@ def login(request):
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('username', '')
-            password = request.POST.get('password', '')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
@@ -71,7 +71,7 @@ def login(request):
                 # return render(request, 'account/index.html')
                 # return render('account/index.html', RequestContext(request))
             else:
-                form.errors = "username password not match"
+                # form.errors = "username password not match"
                 return render(request, 'account/login.html', {'form': form}) 
                 # render_to_response('account/login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
         else:
