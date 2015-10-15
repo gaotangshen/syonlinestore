@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'account',
+    'bootstrap3'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +113,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+BOOTSTRAP3 = {
+
+    # The URL to the jQuery JavaScript file
+    'jquery_url': '//code.jquery.com/jquery.min.js',
+}

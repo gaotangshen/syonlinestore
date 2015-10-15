@@ -1,0 +1,63 @@
+
+{% extends "account/base.html" %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+
+{% endif %}
+<!-- <form class="form-horizontal" method="post" action="{% url 'account:login' %}" >{% csrf_token %}
+    <fieldset>
+        <legend>{{ title }}</legend>
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="control-group error">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="control-group">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        {% if field.help_text %}
+                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" >Submit</button>
+    </div>
+</form> -->
+
+<form method="post" action="{% url 'account:login' %}" class="form-signin">
+{% csrf_token %}
+{% bootstrap_form form %}
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+{% buttons %}
+<button type="submit" class="btn btn-primary"/> Login
+{% endbuttons %}
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'account:password_reset' %}">Lost password?</a></p>
+
+{% endblock %}
+
