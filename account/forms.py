@@ -24,13 +24,13 @@ class LoginForm(forms.Form):
         ),
     )   
 
-<<<<<<< HEAD
-    def clean(self):
-        if not self.is_valid():
-            raise forms.ValidationError(u"Username and Password are required")
-        else:
-            cleaned_data = super(LoginForm, self).clean() 
-=======
+
+#     def clean(self):
+#         if not self.is_valid():
+#             raise forms.ValidationError(u"Username and Password are required")
+#         else:
+#             cleaned_data = super(LoginForm, self).clean() 
+
     def clean_password(self):
         cleaned_data=self.cleaned_data
         data_email=cleaned_data.get("username")
@@ -51,7 +51,7 @@ class LoginForm(forms.Form):
         if not is_exist:
             raise forms.ValidationError("Username not exists.")
         return data
->>>>>>> 1690c66077f5228b5f0b5ae08ccb38a250cf01f1
+
 
 class RegistrationForm(forms.Form):
  
