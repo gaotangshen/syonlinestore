@@ -71,7 +71,6 @@ def login(request):
                 # return render(request, 'account/index.html')
                 # return render('account/index.html', RequestContext(request))
             else:
-                form.errors = "username password not match"
                 return render(request, 'account/login.html', {'form': form}) 
                 # render_to_response('account/login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
         else:
