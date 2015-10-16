@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.hashers import make_password
 # from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 
 class LoginForm(forms.Form):
@@ -23,34 +25,29 @@ class LoginForm(forms.Form):
             }
         ),
     )   
-
-
-#     def clean(self):
-#         if not self.is_valid():
-#             raise forms.ValidationError(u"Username and Password are required")
-#         else:
-#             cleaned_data = super(LoginForm, self).clean() 
-
     def clean_password(self):
-        cleaned_data=self.cleaned_data
-        data_email=cleaned_data.get("username")
-        data_password=cleaned_data.get("password")
-        if data_password:
-            is_exist=User.objects.filter(username=data_email,password=data_password).exists()
-            if not is_exist:
-                raise forms.ValidationError("Password is wrong!")
-            return cleaned_data
-        # if not self.is_valid():
-        #     raise forms.ValidationError(u"Username and Password are required")
-        # else:
-        #     cleaned_data = super(LoginForm, self).clean() 
-    def clean_username(self):
-        data=self.cleaned_data['username']
-        is_exist=User.objects.filter(username=data).exists()
-        
-        if not is_exist:
-            raise forms.ValidationError("Username not exists.")
-        return data
+        user = self.authenticate_via_username()
+        if not user:
+            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+        else:
+            self.user = user
+        return self.cleaned_data['password']
+
+
+    def authenticate_via_username(self):
+        """
+            Authenticate user using email.
+            Returns user object if authenticated else None
+        """
+        username = self.cleaned_data['username']
+        if username:
+            try:
+                user = User.objects.get(username__iexact=username)
+                if user.check_password(self.cleaned_data['password']):
+                    return user
+            except :
+                return None
+        return None
 
 
 class RegistrationForm(forms.Form):

@@ -65,6 +65,7 @@ def login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
+            # print(password)
             if user is not None and user.is_active:
                 auth.login(request, user)
                 return redirect('http://127.0.0.1:8000/account/')
