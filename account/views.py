@@ -50,6 +50,7 @@ def logout(request):
  
 @login_required
 def home(request):
+    request.user.username = request.user.username.upper()
     return render_to_response(
     'account/index.html',
     { 'user': request.user }

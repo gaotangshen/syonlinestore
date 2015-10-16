@@ -118,3 +118,6 @@ BOOTSTRAP3 = {
     # The URL to the jQuery JavaScript file
     'jquery_url': '//code.jquery.com/jquery.min.js',
 }
+
+MEDIA_ROOT = 'products/medias/'
+MEDIA_URL = '/medias/'

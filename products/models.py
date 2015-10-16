@@ -7,6 +7,7 @@ class Product(models.Model):
 	pdesc = models.CharField(max_length=200,null=True,blank=True)
 	pstatus = models.BooleanField(default=True)
 	pdate = models.DateTimeField('add date',default=datetime.datetime.now)
+	pimage = models.FileField(upload_to='files/%Y/%m/%d/',max_length=100,null=True,blank=True)
 	
 	def was_published_recently(self):
 		now = timezone.now();

@@ -1,7 +1,53 @@
-{% if user.is_authenticated %}
-<h1>{{ user.username }}</h1>
-<p>Your account doesn't have access to this page. To proceed,
-please login with an account that has access.</p>
+{% extends "account/base.html" %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+{% block content %}
+
+<!-- {% if user.is_authenticated %}
+<h1> Hello, {{ user.username }}</h1>
+<p></p>
 {% else %}
 <p>Please login to see this page.</p>
-{% endif %}
+{% endif %} -->
+<div class="row">
+	<div class="col-sm-3 col-md-2 sidebar">
+		<ul class="nav nav-sidebar">
+			<li class="active"><a data-target="#" data-toggle="pill" href="#Reports">Overview</a></li>
+			<li><a data-target="#" data-toggle="pill" href="#Reports">Reports</a></li>
+			<li><a data-target="#" data-toggle="pill" href="#Reports">Analytics</a></li>
+			<li><a data-target="#" data-toggle="pill" href="#Reports">Export</a></li>
+		</ul>
+		<ul class="nav nav-sidebar">
+			<li><a href="">Add Product</a></li>
+		</ul>
+	</div>
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		<h1 class="page-header">Dashboard</h1>
+
+		<div class="row placeholders">
+			<div class="col-xs-6 col-sm-3 placeholder">
+				<img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+				<h4>Label</h4>
+				<span class="text-muted">Something else</span>
+			</div>
+			<div class="col-xs-6 col-sm-3 placeholder">
+				<img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+				<h4>Label</h4>
+				<span class="text-muted">Something else</span>
+			</div>
+			<div class="col-xs-6 col-sm-3 placeholder">
+				<img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+				<h4>Label</h4>
+				<span class="text-muted">Something else</span>
+			</div>
+			<div class="col-xs-6 col-sm-3 placeholder">
+				<img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+				<h4>Label</h4>
+				<span class="text-muted">Something else</span>
+			</div>
+		</div>
+
+		
+	</div>
+</div>
+{% endblock %}

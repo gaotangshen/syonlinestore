@@ -12,6 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
         (None,               {'fields': ['pname','pdesc']}),
         # (None,               {'fields': ['pdesc']}),
         ('Date information', {'fields': ['pdate'], 'classes': ['collapse']}),
+        ('Product Image', {'fields': ['pimage']}),
     ]
     inlines = [IngredientInline]
     list_display = ('pname', 'pdesc', 'pdate', 'was_published_recently')
